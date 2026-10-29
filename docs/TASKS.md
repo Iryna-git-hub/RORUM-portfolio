@@ -9,7 +9,7 @@ Format: **Goal** · **Files** · **Done when** · **Verify**
 
 ## Phase 0 — Make the project trustworthy
 
-- [ ] **T-01 Verify the Sanity import**
+- [x] **T-01 Verify the Sanity import**
   **Goal:** Confirm the new Sanity project contains the imported content and that the site and Studio read from it (not from the old client project).
   **Files:** none changed (read-only check; may add notes to `docs/PROGRESS.md`).
   **Done when:** project id in `.env.local` differs from the client's; Studio at `/studio` shows pages, events and images; the home page renders real content.
