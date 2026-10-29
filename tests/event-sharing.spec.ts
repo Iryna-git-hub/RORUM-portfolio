@@ -2,8 +2,11 @@ import { expect, test } from "@playwright/test";
 
 const EVENT_SLUG = "community-reset-night";
 const SOCIAL_IMAGE_ASSET = "8190a2ea174619553f3bf1bb2b497b879ce7f5f8";
+// Project id and dataset come from .env.local (loaded by playwright.config.ts),
+// so the expected image URL follows whichever Sanity project the site reads.
+const SANITY_IMAGE_PATH = `cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}`;
 const SOCIAL_IMAGE_URL =
-  `https://cdn.sanity.io/images/939cqwfo/production/${SOCIAL_IMAGE_ASSET}-1448x1086.png` +
+  `https://${SANITY_IMAGE_PATH}/${SOCIAL_IMAGE_ASSET}-1448x1086.png` +
   "?rect=0,163,1448,760&w=1200&h=630&fit=crop&auto=format";
 const testOrigin = process.env.EVENT_SHARING_TEST_ORIGIN?.replace(/\/$/, "") ?? "";
 // The webServer (see playwright.config.ts) is a real `next build && next
@@ -68,7 +71,7 @@ test.describe("Community Reset Night share metadata", () => {
       await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute("content", "630");
 
       const imageUrl = await page.locator('meta[property="og:image"]').getAttribute("content");
-      expect(imageUrl).toContain(`cdn.sanity.io/images/939cqwfo/production/${SOCIAL_IMAGE_ASSET}`);
+      expect(imageUrl).toContain(`${SANITY_IMAGE_PATH}/${SOCIAL_IMAGE_ASSET}`);
       expect(imageUrl).toContain("w=1200");
       expect(imageUrl).toContain("h=630");
 
