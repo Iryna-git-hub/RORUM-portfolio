@@ -846,3 +846,18 @@ Do not propose commit messages.
 Do not suggest commits or pushes.
 
 Do not modify Git or GitHub.
+
+
+## Full-stack work rules (portfolio phase)
+
+This repository is now being developed as a portfolio full-stack project. The owner must be able to explain every line in an interview.
+
+- Work from `docs/TASKS.md`, one task at a time (`/next-task`). Plan first, wait for "go".
+- Small diffs: one logical change, ≤ ~150 lines. If it grows, stop and propose a split.
+- Explain new concepts briefly when you introduce them (ORM schema, transactions, migrations, hooks).
+- Backend lives in this repo (Next.js Route Handlers). Layers: `app/api/**/route.ts` (thin: parse → call service → respond) → `server/services/` (business rules) → `server/repositories/` (SQL via Drizzle) → `server/db/schema.ts`. Validate all input with Zod. Never import `server/*` from client components.
+- Serverless rules: pooled DB connection string, no in-memory state (rate limits and sessions in Postgres), every migration reversible or documented.
+- Never run `npm run sanity:*` or `npm run billetto:*` (they write to live services) — print the command for the user instead.
+- Studio help text is English only. Content fields stay EN/DA/UK; keep the language registry static and complete (en, da, uk).
+- Everything in the repo is written in English. The user may talk to you in Russian.
+- No Git or GitHub write operations — see §3. A hook blocks them. End every task with a suggested commit message and branch name.
