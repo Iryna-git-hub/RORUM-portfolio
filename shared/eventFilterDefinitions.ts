@@ -96,6 +96,54 @@ export const ALL_EVENT_FILTER_ITEM_KEYS: readonly string[] = [
   ...EVENT_FILTER_MESSAGE_ROWS.map((m) => m.itemKey),
 ];
 
+/**
+ * The Events listing's code-level fallback text, used when Sanity has no
+ * value for a label. Lives here (not in the "use client" components that
+ * render it) because server code reads these values too — a value imported
+ * from a "use client" module is only a client reference on the server, so
+ * reading `.dateLabel` off it there returns `undefined` and every fallback
+ * label rendered empty.
+ */
+export interface EventFilterLabels {
+  dateLabel: string;
+  languageLabel: string;
+  priceLabel: string;
+  availabilityLabel: string;
+  soonestLabel: string;
+  weekLabel: string;
+  monthLabel: string;
+  priceAscLabel: string;
+  priceDescLabel: string;
+  availableLabel: string;
+  soldOutLabel: string;
+  clearFiltersLabel: string;
+}
+
+export const defaultEventFilterLabels: EventFilterLabels = {
+  dateLabel: "Date",
+  languageLabel: "Languages",
+  priceLabel: "Price",
+  availabilityLabel: "Availability",
+  soonestLabel: "Soonest first",
+  weekLabel: "This week",
+  monthLabel: "This month",
+  priceAscLabel: "From low to high",
+  priceDescLabel: "From high to low",
+  availableLabel: "Available",
+  soldOutLabel: "Sold out",
+  clearFiltersLabel: "Clear filters",
+};
+
+export interface EventsEmptyStateText {
+  title: string;
+  text: string;
+}
+
+export const defaultEventsEmptyStateText: EventsEmptyStateText = {
+  title: "No events match your filters.",
+  text: "Try changing the date, language, price or availability.",
+};
+
 export function getFilterGroup(groupKey: FilterGroupKey): FilterGroupDefinition {
   const group = EVENT_FILTER_GROUPS.find((g) => g.groupKey === groupKey);
   if (!group) throw new Error(`getFilterGroup: unknown groupKey "${groupKey}"`);

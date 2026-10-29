@@ -12,7 +12,8 @@ import {
   type ButtonVariant,
 } from "@/components/ui";
 import { MembershipBenefitsGrid } from "@/components/MembershipBenefitsGrid";
-import { WecodaDonationSection, defaultBankFields, type BankField } from "@/components/WecodaDonationSection";
+import { WecodaDonationSection } from "@/components/WecodaDonationSection";
+import { defaultBankFields, type BankField } from "@/lib/wecodaBankFields";
 import { localizedPageMetadata } from "@/lib/seo";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { compact, pickLocalized, type I18nEntry } from "@/lib/sanity-i18n";
@@ -463,6 +464,39 @@ export default async function CommunityMembershipPage({ params }: { params: Prom
         </Container>
       </section>
 
+      <section className="section wecoda-membership-week-section">
+        <Container>
+          <SectionHeader label={data.galleryLabel} title={data.galleryTitle} />
+          <div className="wecoda-membership-week-grid grid grid-cols-4 auto-rows-[clamp(230px,21vw,340px)] gap-[clamp(12px,1.6vw,18px)] max-lg:grid-cols-2 max-lg:auto-rows-[clamp(190px,38vw,320px)] max-[560px]:grid-cols-1 max-[560px]:auto-rows-[clamp(230px,72vw,380px)]">
+            {data.gallery.map((item) => (
+              <figure
+                className={`wecoda-membership-week-item relative min-w-0 min-h-0 m-0 overflow-hidden bg-beige ${
+                  item.featured
+                    ? "wecoda-membership-week-item-featured col-span-2 row-span-2 max-[560px]:col-auto max-[560px]:row-span-1"
+                    : ""
+                }`}
+                key={item.src}
+                data-sanity={item.editAttr}
+              >
+                {item.type === "video" ? (
+                  <video
+                    src={item.src}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    aria-label={item.label}
+                  />
+                ) : (
+                  <img src={item.src} alt={item.alt} loading="lazy" />
+                )}
+              </figure>
+            ))}
+          </div>
+        </Container>
+      </section>
+
       <WecodaDonationSection
         qrSrc={data.donationQrSrc}
         qrEditAttr={data.donationQrEditAttr}
@@ -622,38 +656,7 @@ export default async function CommunityMembershipPage({ params }: { params: Prom
         </Container>
       </section>
 
-      <section className="section wecoda-membership-week-section">
-        <Container>
-          <SectionHeader label={data.galleryLabel} title={data.galleryTitle} />
-          <div className="wecoda-membership-week-grid grid grid-cols-4 auto-rows-[clamp(230px,21vw,340px)] gap-[clamp(12px,1.6vw,18px)] max-lg:grid-cols-2 max-lg:auto-rows-[clamp(190px,38vw,320px)] max-[560px]:grid-cols-1 max-[560px]:auto-rows-[clamp(230px,72vw,380px)]">
-            {data.gallery.map((item) => (
-              <figure
-                className={`wecoda-membership-week-item relative min-w-0 min-h-0 m-0 overflow-hidden bg-beige ${
-                  item.featured
-                    ? "wecoda-membership-week-item-featured col-span-2 row-span-2 max-[560px]:col-auto max-[560px]:row-span-1"
-                    : ""
-                }`}
-                key={item.src}
-                data-sanity={item.editAttr}
-              >
-                {item.type === "video" ? (
-                  <video
-                    src={item.src}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    aria-label={item.label}
-                  />
-                ) : (
-                  <img src={item.src} alt={item.alt} loading="lazy" />
-                )}
-              </figure>
-            ))}
-          </div>
-        </Container>
-      </section>
+      
     </>
   );
 }

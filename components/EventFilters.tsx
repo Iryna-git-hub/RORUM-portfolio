@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useLayoutEffect, useRef, useState } from "react";
 import { localizedHref } from "@/lib/i18n";
 import { useLocale } from "@/lib/useLocale";
+import { defaultEventFilterLabels, type EventFilterLabels } from "@/shared/eventFilterDefinitions";
 
 export type EventDateFilter = "soonest" | "week" | "month" | "all";
 export type EventPriceFilter = "price-asc" | "price-desc" | "all";
@@ -16,36 +17,6 @@ interface FilterOption {
   value: string;
   label: string;
 }
-
-export interface EventFilterLabels {
-  dateLabel: string;
-  languageLabel: string;
-  priceLabel: string;
-  availabilityLabel: string;
-  soonestLabel: string;
-  weekLabel: string;
-  monthLabel: string;
-  priceAscLabel: string;
-  priceDescLabel: string;
-  availableLabel: string;
-  soldOutLabel: string;
-  clearFiltersLabel: string;
-}
-
-export const defaultEventFilterLabels: EventFilterLabels = {
-  dateLabel: "Date",
-  languageLabel: "Languages",
-  priceLabel: "Price",
-  availabilityLabel: "Availability",
-  soonestLabel: "Soonest first",
-  weekLabel: "This week",
-  monthLabel: "This month",
-  priceAscLabel: "From low to high",
-  priceDescLabel: "From high to low",
-  availableLabel: "Available",
-  soldOutLabel: "Sold out",
-  clearFiltersLabel: "Clear filters",
-};
 
 function EventFilterDropdown({
   name,

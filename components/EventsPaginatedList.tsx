@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { EventList, defaultEventCardMessages, type EventCardMessages } from "@/components/EventCard";
 import type { RorumEvent } from "@/lib/data";
 import { localizedHref, type Locale } from "@/lib/i18n";
+import { defaultEventsEmptyStateText, type EventsEmptyStateText } from "@/shared/eventFilterDefinitions";
 
 const ROWS_PER_PAGE = 7;
 
@@ -37,16 +38,6 @@ function useEventsPerPage(): number {
 
   return eventsPerPage;
 }
-
-export interface EventsEmptyStateText {
-  title: string;
-  text: string;
-}
-
-export const defaultEventsEmptyStateText: EventsEmptyStateText = {
-  title: "No events match your filters.",
-  text: "Try changing the date, language, price or availability.",
-};
 
 export function EventsPaginatedList({
   events,

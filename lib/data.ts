@@ -408,6 +408,7 @@ interface EventAddition {
   time: string;
   price: string;
   language?: string[];
+  formattedDescription?: ReturnType<typeof plainTextToPortableText>;
   ticketsLeft?: number;
   isSoldOut?: boolean;
   image: string;
@@ -694,13 +695,208 @@ const eventAdditions: EventAddition[] = [
     ticketsLeft: 12,
     image: "/images/events/banners/international-supper-salon.png",
   },
+  {
+    slug: "autumn-flowers-and-creative-connections",
+    title: "Autumn flowers & creative connections",
+    date: "2026-11-07",
+    time: "14:00-16:30",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Create a seasonal arrangement with autumn foliage, delicate blooms and natural textures. Enjoy a relaxed afternoon of hands-on creativity, tea and conversations around our shared table.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "from-milk-to-magic-cheese-making",
+    title: "From milk to magic: cheese making",
+    date: "2026-11-14",
+    time: "12:00-15:00",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Discover how simple ingredients become fresh homemade cheese in this beginner-friendly workshop. Learn the essential steps, experiment with herbs and finish with a shared tasting of your creations.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "women-who-create-networking-evening",
+    title: "Women who create: networking evening",
+    date: "2026-11-19",
+    time: "18:00-20:30",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Meet women building businesses, exploring creative ideas and starting new professional chapters in Copenhagen. Guided introductions and small-group conversations create space to exchange experiences and discover potential collaborators.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "clay-and-conversation",
+    title: "Clay & conversation",
+    date: "2026-11-22",
+    time: "13:00-15:30",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Slow down and explore hand-building with clay in a welcoming creative setting. Shape a small decorative bowl or sculptural object while enjoying conversation and the pleasure of making something with your hands.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "the-art-of-a-welcoming-table",
+    title: "The art of a welcoming table",
+    date: "2026-11-28",
+    time: "14:00-16:00",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Explore how flowers, textiles, candles and thoughtful details can transform a table. Create a seasonal setting together and take home practical styling ideas for intimate dinners and special celebrations.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "winter-wreath-workshop",
+    title: "Winter wreath workshop",
+    date: "2026-12-05",
+    time: "12:00-14:30",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Welcome winter by making your own wreath with evergreen branches and natural decorations. Learn to build a balanced composition and take home a handmade piece for your door or festive table.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "ukrainian-kitchen-borscht-and-stories",
+    title: "Ukrainian kitchen: borscht & stories",
+    date: "2026-12-12",
+    time: "12:00-15:00",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Discover Ukrainian food traditions through a hands-on cooking session featuring borscht and soft garlic pampushky. Prepare the meal together, hear the stories behind the dishes and gather around the table to enjoy the results.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "handmade-christmas-cards-and-calligraphy",
+    title: "Handmade Christmas: cards & calligraphy",
+    date: "2026-12-19",
+    time: "13:00-15:30",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Add a personal touch to your festive greetings with handmade cards and pointed-pen lettering. Practise basic strokes, explore seasonal compositions and create cards for the people you love.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "a-gentle-start-vision-board-workshop",
+    title: "A gentle start: vision board workshop",
+    date: "2027-01-09",
+    time: "13:00-15:30",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Make space for what matters to you in the year ahead. Through guided reflection, collage and conversation, create a personal vision board that brings together your intentions, creative interests and everyday priorities.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "yoga-after-work-reset-january",
+    title: "Yoga after work reset",
+    date: "2027-01-14",
+    time: "18:00-19:30",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Step away from your screen and unwind with gentle yoga, mindful breathing and relaxation. Close the evening with herbal tea and a quiet moment before heading home.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "your-brand-your-story",
+    title: "Your brand, your story",
+    date: "2027-01-23",
+    time: "13:00-16:00",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Learn to introduce your business or creative practice with clarity and personality. Through practical exercises and supportive feedback, develop a short brand story and identify the messages you want your audience to remember.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "candle-making-and-slow-living",
+    title: "Candle making & slow living",
+    date: "2027-01-30",
+    time: "14:00-16:30",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Discover the basics of candle making, from preparing a container to choosing a wick and pouring wax. Create your own candle during an unhurried afternoon of conversation and inspiration for cosy winter evenings.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "copenhagen-makers-dinner-2027",
+    title: "Copenhagen makers dinner",
+    date: "2027-02-06",
+    time: "18:00-21:00",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Join an intimate dinner for people who enjoy making things and sharing ideas. Bring a project, a question or simply your curiosity, and meet local creatives over a seasonal meal around one shared table.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "watercolour-botanicals",
+    title: "Watercolour botanicals",
+    date: "2027-02-13",
+    time: "13:00-15:30",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Explore the shapes and colours of leaves and flowers through watercolour painting. Learn simple brush techniques, experiment with transparent washes and create a botanical artwork to take home.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
+  {
+    slug: "creative-founders-circle",
+    title: "Creative founders circle",
+    date: "2027-02-20",
+    time: "14:00-16:30",
+    price: "TBD",
+    language: ["English", "Danish", "Ukrainian"],
+    formattedDescription: plainTextToPortableText(
+      "Bring an idea or a challenge to a supportive gathering of independent professionals and early-stage founders. Exchange experiences, receive constructive feedback and leave with a practical next step for your business or creative project.",
+    ),
+    ticketsLeft: 12,
+    image: "/images/hero.jpg",
+  },
 ];
 
 const expandedEvents: RorumEvent[] = eventAdditions.map((event) => ({
   ...event,
   language: event.language ?? ["English"],
   address: contactDetails.shortAddress,
-  formattedDescription: plainTextToPortableText(
+  formattedDescription: event.formattedDescription ?? plainTextToPortableText(
     `${event.title} brings people together around a simple hosted format with thoughtful pacing, a calm room setup and space for useful conversation.`,
   ),
   included: [

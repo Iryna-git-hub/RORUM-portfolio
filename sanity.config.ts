@@ -3,6 +3,7 @@
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { internationalizedArray } from "sanity-plugin-internationalized-array";
+import { media } from "sanity-plugin-media";
 import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import { apiVersion, assertConfigured } from "@/sanity/env";
@@ -42,6 +43,10 @@ export default defineConfig({
         previewMode: { enable: DRAFT_MODE_ENABLE_ROUTE },
       },
     }),
+    // Media library: a "Media" tab for browsing every uploaded image/file,
+    // seeing where each is used, and deleting unused ones in bulk. Also
+    // adds a "Media" option to image/file fields' Select menu.
+    media(),
     // Local development helper for testing GROQ queries — not linked from
     // the main navigation for editors, available at /studio/vision.
     visionTool({ defaultApiVersion: apiVersion }),
