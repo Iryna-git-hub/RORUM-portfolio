@@ -43,9 +43,17 @@
       "Bash(npm run sanity:*)",
       "Bash(npm run billetto:*)",
       "Read(./.env)",
-      "Read(./.env.*)",
+      "Read(./.env.local)",
+      "Read(./.env.*.local)",
+      "Read(./.env.development)",
+      "Read(./.env.production)",
+      "Read(./.env.test)",
       "Edit(./.env)",
-      "Edit(./.env.*)"
+      "Edit(./.env.local)",
+      "Edit(./.env.*.local)",
+      "Edit(./.env.development)",
+      "Edit(./.env.production)",
+      "Edit(./.env.test)"
     ]
   },
   "hooks": {

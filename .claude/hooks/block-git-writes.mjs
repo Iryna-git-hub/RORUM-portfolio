@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // PreToolUse hook (matcher: Bash).
-// Blocks any command that would change Git / GitHub state.
+// Blocks any command that would change Git / GitHub state or read a secret .env file.
 // Reads the tool call as JSON on stdin; exit code 2 = block, and the
 // message written to stderr is shown to the agent.
 // No dependencies (works on Windows, macOS and Linux).
@@ -12,6 +12,7 @@ const ALWAYS_BLOCKED = new Set([
   "commit", "push", "add", "checkout", "switch", "merge", "rebase", "reset",
   "restore", "cherry-pick", "revert", "pull", "clean", "rm", "mv", "am",
   "apply", "worktree", "submodule", "gc", "filter-branch",
+  "update-ref", "notes", "commit-tree",
 ]);
 
 // Subcommands that are blocked unless every argument is a read-only flag.
@@ -68,6 +69,14 @@ function blockedReason(command) {
   return null;
 }
 
+// The Read/Edit deny rules in settings.json do not cover shell commands such as
+// `cat .env.local`. Block any command that names a .env file other than .env.example.
+// `(?<![\w$])` skips code like `process.env.FOO`.
+function secretEnvFile(command) {
+  const names = command.match(/(?<![\w$])\.env(?:\.[\w-]+)*/g) ?? [];
+  return names.find((name) => name !== ".env.example") ?? null;
+}
+
 let input = "";
 try {
   input = readFileSync(0, "utf8");
@@ -84,6 +93,15 @@ try {
 
 const command = payload?.tool_input?.command;
 if (payload?.tool_name !== "Bash" || typeof command !== "string") process.exit(0);
+
+const envFile = secretEnvFile(command);
+if (envFile) {
+  process.stderr.write(
+    `BLOCKED: the command touches "${envFile}", which may contain secrets. ` +
+      `Use .env.example and variable names only.\n`
+  );
+  process.exit(2);
+}
 
 const reason = blockedReason(command);
 if (reason) {
