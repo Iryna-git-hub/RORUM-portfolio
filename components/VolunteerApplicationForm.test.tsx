@@ -25,8 +25,16 @@ beforeEach(() => {
 });
 afterEach(() => cleanup());
 
-async function openAndFill() {
+// ApplicationModal moves focus to its close button one animation frame after opening.
+// Wait for that before typing: on a slow machine (CI) the focus move otherwise lands
+// mid-typing, and the next space key "clicks" the close button and closes the modal.
+async function openModal() {
   await userEvent.click(screen.getByRole("button", { name: /Apply to volunteer/i }));
+  await waitFor(() => expect(screen.getByRole("dialog")).toContainElement(document.activeElement as HTMLElement));
+}
+
+async function openAndFill() {
+  await openModal();
   await userEvent.type(screen.getByLabelText(/Full Name/), "Mette Larsen");
   await userEvent.type(screen.getByLabelText(/Phone number/), "+45 11 22 33 44");
   await userEvent.type(screen.getByLabelText(/^Email/), "mette@example.com");
@@ -76,7 +84,7 @@ describe("VolunteerApplicationForm — unified Formspree delivery", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     await waitFor(() => expect(screen.getByRole("button", { name: /Apply to volunteer/i })).toHaveFocus());
 
-    await userEvent.click(screen.getByRole("button", { name: /Apply to volunteer/i }));
+    await openModal();
     expect(await screen.findByLabelText(/Full Name/)).toHaveValue("");
     expect(screen.queryByText("Application sent!")).not.toBeInTheDocument();
   });
@@ -118,13 +126,13 @@ describe("VolunteerApplicationForm — unified Formspree delivery", () => {
 describe("VolunteerApplicationForm — privacy consent is mandatory", () => {
   it("the consent checkbox is unchecked by default when the modal opens", async () => {
     render(<VolunteerApplicationButton />);
-    await userEvent.click(screen.getByRole("button", { name: /Apply to volunteer/i }));
+    await openModal();
     expect((screen.getByRole("checkbox") as HTMLInputElement).checked).toBe(false);
   });
 
   it("blocks submission when consent is unchecked — no Formspree call, no success dialog, localized error, input preserved", async () => {
     render(<VolunteerApplicationButton content={{ modalTitle: "V", messagePlaceholder: "", successMessage: "Application sent!", errorMessage: "err" }} />);
-    await userEvent.click(screen.getByRole("button", { name: /Apply to volunteer/i }));
+    await openModal();
     await userEvent.type(screen.getByLabelText(/Full Name/), "Mette Larsen");
     await userEvent.type(screen.getByLabelText(/Phone number/), "+45 11 22 33 44");
     await userEvent.type(screen.getByLabelText(/^Email/), "mette@example.com");
@@ -140,7 +148,7 @@ describe("VolunteerApplicationForm — privacy consent is mandatory", () => {
 
   it("blocks keyboard-only submission (Enter in a text field) exactly like a mouse click", async () => {
     render(<VolunteerApplicationButton content={{ modalTitle: "V", messagePlaceholder: "", successMessage: "Application sent!", errorMessage: "err" }} />);
-    await userEvent.click(screen.getByRole("button", { name: /Apply to volunteer/i }));
+    await openModal();
     await userEvent.type(screen.getByLabelText(/Phone number/), "+45 11 22 33 44");
     await userEvent.type(screen.getByLabelText(/^Email/), "mette@example.com");
     await userEvent.type(screen.getByLabelText(/Message/), "I'd love to help at events");
@@ -154,7 +162,7 @@ describe("VolunteerApplicationForm — privacy consent is mandatory", () => {
   it("checking consent after a blocked attempt allows submission, with Consent: Yes in the payload", async () => {
     submitToFormspreeMock.mockResolvedValue(undefined);
     render(<VolunteerApplicationButton content={{ modalTitle: "V", messagePlaceholder: "", successMessage: "Application sent!", errorMessage: "err" }} />);
-    await userEvent.click(screen.getByRole("button", { name: /Apply to volunteer/i }));
+    await openModal();
     await userEvent.type(screen.getByLabelText(/Full Name/), "Mette Larsen");
     await userEvent.type(screen.getByLabelText(/Phone number/), "+45 11 22 33 44");
     await userEvent.type(screen.getByLabelText(/^Email/), "mette@example.com");
@@ -179,7 +187,7 @@ describe("VolunteerApplicationForm — privacy consent is mandatory", () => {
     await screen.findByRole("dialog");
     await userEvent.click(screen.getByRole("button", { name: "Done" }));
 
-    await userEvent.click(screen.getByRole("button", { name: /Apply to volunteer/i }));
+    await openModal();
     expect((screen.getByRole("checkbox") as HTMLInputElement).checked).toBe(false);
   });
 });
