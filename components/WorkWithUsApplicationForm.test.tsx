@@ -51,8 +51,12 @@ const roleOptions: SelectableOption[] = [
   { value: "role7", label: "Other" },
 ];
 
+// ApplicationModal moves focus to its close button one animation frame after opening.
+// Wait for that before typing: on a slow machine (CI) the focus move otherwise lands
+// mid-typing, and the next space key "clicks" the close button and closes the modal.
 async function openModal() {
   await userEvent.click(screen.getByRole("button", { name: /Apply now/i }));
+  await waitFor(() => expect(screen.getByRole("dialog")).toContainElement(document.activeElement as HTMLElement));
 }
 
 async function fillRequiredFields(roleLabels: string[] = ["Social media & content"]) {

@@ -1,8 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { resolveEventFilterLabels, resolveEventsEmptyStateText, resolveOrderedEventLanguageOptions, resolveOrderedFilterOptions } from "./eventFilters";
-import { EVENT_FILTER_GROUPS, EVENT_FILTER_MESSAGE_ROWS } from "@/shared/eventFilterDefinitions";
-import { defaultEventFilterLabels } from "@/components/EventFilters";
-import { defaultEventsEmptyStateText } from "@/components/EventsPaginatedList";
+import {
+  EVENT_FILTER_GROUPS,
+  EVENT_FILTER_MESSAGE_ROWS,
+  defaultEventFilterLabels,
+  defaultEventsEmptyStateText,
+} from "@/shared/eventFilterDefinitions";
 import type { RawPageSection } from "./sanity-sections";
 
 function i18n(en: string) {

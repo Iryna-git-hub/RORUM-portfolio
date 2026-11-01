@@ -5,13 +5,10 @@ import {
   EventFilters,
   type EventAvailabilityFilter,
   type EventDateFilter,
-  type EventFilterLabels,
   type EventPriceFilter,
 } from "@/components/EventFilters";
-import {
-  EventsPaginatedList,
-  type EventsEmptyStateText,
-} from "@/components/EventsPaginatedList";
+import { EventsPaginatedList } from "@/components/EventsPaginatedList";
+import type { EventFilterLabels, EventsEmptyStateText } from "@/shared/eventFilterDefinitions";
 import type { EventCardMessages } from "@/components/EventCard";
 import type { RorumEvent } from "@/lib/data";
 import { isUpcomingEvent } from "@/lib/eventVisibility";

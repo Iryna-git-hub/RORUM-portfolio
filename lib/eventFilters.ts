@@ -18,10 +18,14 @@
 import type { Locale } from "@/lib/i18n";
 import { pickLocalized } from "@/lib/sanity-i18n";
 import { getItem, type RawPageSection } from "@/lib/sanity-sections";
-import { defaultEventFilterLabels, type EventFilterLabels } from "@/components/EventFilters";
-import type { EventsEmptyStateText } from "@/components/EventsPaginatedList";
 import { getEventLanguageLabel } from "@/lib/eventLanguage";
-import { getFilterGroup, type OrderableFilterGroupKey } from "@/shared/eventFilterDefinitions";
+import {
+  defaultEventFilterLabels,
+  getFilterGroup,
+  type EventFilterLabels,
+  type EventsEmptyStateText,
+  type OrderableFilterGroupKey,
+} from "@/shared/eventFilterDefinitions";
 
 export type { OrderableFilterGroupKey };
 

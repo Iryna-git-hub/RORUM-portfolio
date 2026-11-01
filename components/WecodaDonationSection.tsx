@@ -5,27 +5,7 @@ import Image from "next/image";
 import { Check, ChevronDown, Copy, Landmark } from "lucide-react";
 import { Container, SectionLabel } from "@/components/ui";
 import { useFormContent } from "@/components/FormContentProvider";
-
-export interface BankField {
-  label: string;
-  value: string;
-  copyable?: boolean;
-}
-
-export const defaultBankFields: BankField[] = [
-  {
-    label: "Beneficiary",
-    value: "Women Entrepreneurs Commerce & Development Association (WECODA)",
-  },
-  { label: "CVR", value: "46365208" },
-  { label: "Bank", value: "Danske Bank" },
-  { label: "Account Type", value: "Danske Direkte Forening" },
-  { label: "Account No.", value: "14165789", copyable: true },
-  { label: "Reg. No.", value: "9570" },
-  { label: "IBAN", value: "DK96 3000 0014 1657 89", copyable: true },
-  { label: "SWIFT/BIC", value: "DABADKKK" },
-  { label: "Currency", value: "DKK (Danish Krone)" },
-];
+import { defaultBankFields, type BankField } from "@/lib/wecodaBankFields";
 
 function CopyButton({
   label,

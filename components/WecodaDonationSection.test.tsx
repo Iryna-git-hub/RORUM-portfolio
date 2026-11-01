@@ -12,7 +12,8 @@ import { describe, expect, it, afterEach, vi } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/vitest";
-import { WecodaDonationSection, defaultBankFields, type BankField } from "./WecodaDonationSection";
+import { WecodaDonationSection } from "./WecodaDonationSection";
+import { defaultBankFields, type BankField } from "@/lib/wecodaBankFields";
 
 afterEach(() => cleanup());
 
