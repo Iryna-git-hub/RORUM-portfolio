@@ -43,7 +43,7 @@ Format: **Goal** · **Files** · **Done when** · **Verify**
   **Files:** `tests/event-sharing.spec.ts`.
   **Verify:** `grep` finds no occurrence; the spec still lists/loads.
 
-- [ ] **T-08 Replace `.claude/settings.json` with the safe version**
+- [x] **T-08 Replace `.claude/settings.json` with the safe version**
   **Goal:** Remove the old allow-list (contains personal paths and risky `git`/`npm run *` permissions); add the new settings, hook and skill from the starter kit.
   **Files:** `.claude/settings.json`, `.claude/hooks/block-git-writes.mjs`, `.claude/skills/next-task/SKILL.md`.
   **Verify:** ask the agent to run `git status` (works) and `git add .` (blocked).
